@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// prisma/schema.prisma
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model Employee { // Represents a table of data
+  id    Int   @id @default(autoincrement()) //qnd adiciona um novo funciona o id é um int autoincrement
+  name  String //nome é um string
+  email String  @unique //email é um string unico
+  role  Role
+  createdAt DateTime @default(now()) //data de criação
+  updatedAt DateTime @updatedAt //data de atualização
+
+}
+
+enum Role {
+  INTERN
+  ENGINEER
+  ADMIN
+}
+
+
